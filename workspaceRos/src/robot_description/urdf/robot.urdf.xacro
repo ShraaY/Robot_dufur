@@ -154,27 +154,26 @@
 
 
 
-  <!-- Joint Chassis-Hokuyo-->
-  <!-- <joint name="hokuyo_joint" type="fixed">
-
+   <!-- Joint Chassis-Support Hokuyo-->
+   <joint name="support_hokuyo_joint" type="fixed">
       <axis xyz="0 1 0" />
       <origin xyz="0 0 0.22" rpy="0 0 0"/>
       <parent link="chassis"/>
-      <child link="hokuyo_link"/>
-   </joint>-->
+      <child link="hokuyo_support"/>
+   </joint>
 
-   <!-- Hokuyo Laser -->
- <!--  <link name="hokuyo_link">
+   <!-- Hokuyo Support -->
+   <link name="hokuyo_support">
       <collision>
          <origin xyz="0 0 -0.03" rpy="0 0 0"/>
          <geometry>
-    	    <cylinder radius="0.05" length="0.2"/>
+    	    <cylinder radius="0.05" length="0.14"/>
          </geometry>
       </collision>
       <visual>
          <origin xyz="0 0 -0.03" rpy="0 0 0"/>
          <geometry>
-            <cylinder radius="0.05" length="0.2"/>
+            <cylinder radius="0.05" length="0.14"/>
          </geometry>
       </visual>
       <inertial>
@@ -182,10 +181,39 @@
          <origin xyz="0 0 0" rpy="0 0 0"/>
          <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
       </inertial>
-   </link>-->
+   </link>
+
+   <!-- Joint Support-Hokuyo-->
+   <joint name="hokuyo_support" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="0 0 0.06" rpy="0 0 0"/>
+      <parent link="hokuyo_support"/>
+      <child link="hokuyo_link"/>
+   </joint>-->
+
+   <!-- Hokuyo Laser -->
+   <link name="hokuyo_link">
+      <collision>
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+         <geometry>
+    	    <cylinder radius="0.05" length="0.05"/>
+         </geometry>
+      </collision>
+      <visual>
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+         <geometry>
+            <cylinder radius="0.05" length="0.05"/>
+         </geometry>
+      </visual>
+      <inertial>
+         <mass value="1e-5" />
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+         <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+   </link>
 
    <!-- Plugin Hokuyo -->
-  <!--  <gazebo reference="hokuyo_link">
+   <gazebo reference="hokuyo_link">
       <sensor type="ray" name="head_hokuyo_sensor">
          <pose>0 0 0.5 0 0 0</pose>
          <visualize>true</visualize>
@@ -205,12 +233,12 @@
                <resolution>0.01</resolution>
             </range>
             <noise>
-               <type>gaussian</type>-->
+               <type>gaussian</type>
                <!-- Noise parameters based on published spec for Hokuyo laser
                achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
                stddev of 0.01m will put 99.7% of samples within 0.03m of the true
                reading. -->
-            <!--    <mean>0.0</mean>
+               <mean>0.0</mean>
                <stddev>0.01</stddev>
             </noise>
          </ray>
@@ -219,7 +247,7 @@
             <frameName>hokuyo_link</frameName>
          </plugin>
       </sensor>
-   </gazebo> -->
+   </gazebo>
 
 
     <!-- joint Chassis-Camera -->
