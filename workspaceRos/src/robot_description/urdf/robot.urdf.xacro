@@ -154,8 +154,10 @@
 
 
 
+
    <!-- Joint Chassis-Support Hokuyo-->
    <joint name="support_hokuyo_joint" type="fixed">
+
       <axis xyz="0 1 0" />
       <origin xyz="0 0 0.22" rpy="0 0 0"/>
       <parent link="chassis"/>
@@ -172,6 +174,35 @@
       </collision>
       <visual>
          <origin xyz="0 0 -0.03" rpy="0 0 0"/>
+         <geometry>
+            <cylinder radius="0.05" length="0.14"/>
+         </geometry>
+      </visual>
+      <inertial>
+         <mass value="1e-5" />
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+         <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+   </link>
+
+   <!-- Joint Support-Hokuyo-->
+   <joint name="hokuyo_support" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="0 0 0.06" rpy="0 0 0"/>
+      <parent link="hokuyo_support"/>
+      <child link="hokuyo_link"/>
+   </joint>
+
+   <!-- Hokuyo Support -->
+   <link name="hokuyo_support">
+      <collision>
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+         <geometry>
+    	    <cylinder radius="0.05" length="0.14"/>
+         </geometry>
+      </collision>
+      <visual>
+         <origin xyz="0 0 0" rpy="0 0 0"/>
          <geometry>
             <cylinder radius="0.05" length="0.14"/>
          </geometry>
